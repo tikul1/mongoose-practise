@@ -14,7 +14,8 @@ async function main() {
   const filter = { name: "hardik" };
   const update = { age: 30 };
   const doc = await User.findOneAndUpdate(filter, update, {
-    new: true,
+    new: true, //same as returnOriginal:false
+    upsert: true,
   });
   console.log(user);
   await doc.save();
