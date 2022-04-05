@@ -4,8 +4,11 @@ main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/hardik", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useNewUrlParser: true, //for URL parsing
+    useUnifiedTopology: true, //for autoreconnect
+    poolSize: 10, //socket size to 10, by default 5
+    bufferMaxEntries: 0, //set this to 0 or false. else it will fail immediately when driver is not connected
+    reconnectTries: 5000, //it will try to reonnect
   });
   const dataSchema = new mongoose.Schema({
     name: String,
